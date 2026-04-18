@@ -1,12 +1,19 @@
 import { useState } from 'react'
 import './App.css'
 import StudentsPage from './pages/StudentsPage'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import AddStudents from './pages/AddStudents'
 
 function App() {
 
   return (
     <>
-     <StudentsPage />
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<StudentsPage/>} />
+      <Route path="/addStudents" element={<AddStudents/>} />
+    </Routes>
+    </BrowserRouter>
     </>
   )
 }

@@ -2,10 +2,12 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import { getStudents } from '../api/studentApi';
 import { toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
 
 const StudentsPage = () => {
 
     const [students, setStudents] = useState([]);
+    const navigate = useNavigate();
 
     const fetchStudents = async () => {
         try {
@@ -39,6 +41,7 @@ const StudentsPage = () => {
             ))
             }
 
+            <button onClick={() => navigate("/addStudents")}>Add Students</button>
         </div>
     )
 }
