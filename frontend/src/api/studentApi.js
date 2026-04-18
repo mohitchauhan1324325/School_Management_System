@@ -1,7 +1,9 @@
 export const getStudents = async () => {
     try {
         const res = await fetch("http://localhost:5000/students");
-        return res.data;
+        
+        const data = await res.json();
+        return data;
 
     } catch (error) {
         throw error;

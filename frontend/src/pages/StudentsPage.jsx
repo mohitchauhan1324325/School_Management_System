@@ -27,8 +27,11 @@ const StudentsPage = () => {
     return (
         <div>
             {students?.map((student) => (
-                <div key={student._id}>
-                    <h1>Name:{student.name}</h1>
+                <div 
+                key={student._id}
+                className='flex gap-20'
+                >
+                    <h1 className='text-3xl'>Name:{student.name}</h1>
                     <h3>Age: {student.age}</h3>
                     <h3>grade: {student.grade}</h3>
                     <h3>School Name: {student.schoolName || "No School"}</h3>
