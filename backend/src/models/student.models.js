@@ -13,10 +13,13 @@ const studentSchema = new mongoose.Schema({
         required: true
     },
 
-    grade: {
+    class: {
         type: Number,
         required: true
-    }
+    },
+
+    schoolName: String,
+
 }, {timestamps: true});
 
 const Student = mongoose.model("Student", studentSchema);
