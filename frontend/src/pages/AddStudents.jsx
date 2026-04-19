@@ -22,22 +22,27 @@ const AddStudents = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); // ❗ important
+        e.preventDefault();
 
         try {
             await addStudents(formData);
             toast.success("Student registered successfully!");
-
             navigate("/");
-
         } catch (error) {
             toast.error("Error");
         }
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+            <form 
+                onSubmit={handleSubmit}
+                className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md space-y-4"
+            >
+
+                <h2 className="text-2xl font-bold text-center text-gray-700">
+                    Add Student
+                </h2>
 
                 <input
                     type="text"
@@ -45,6 +50,7 @@ const AddStudents = () => {
                     placeholder='Enter name'
                     value={formData.name}
                     onChange={handleChange}
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
 
                 <input
@@ -53,6 +59,7 @@ const AddStudents = () => {
                     placeholder='Enter Age'
                     value={formData.age}
                     onChange={handleChange}
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
 
                 <input
@@ -61,6 +68,7 @@ const AddStudents = () => {
                     placeholder='Enter Class'
                     value={formData.class}
                     onChange={handleChange}
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
 
                 <input
@@ -69,9 +77,16 @@ const AddStudents = () => {
                     placeholder='Enter School name'
                     value={formData.schoolName}
                     onChange={handleChange}
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
 
-                <button type="submit">Submit Student</button>
+                <button 
+                    type="submit"
+                    className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200"
+                >
+                    Submit Student
+                </button>
+
             </form>
         </div>
     );
