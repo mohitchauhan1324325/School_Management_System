@@ -1,23 +1,26 @@
 import dns from "node:dns/promises";
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
-import express from "express"
-import dotenv from "dotenv"
-import { PORT } from "./constants.js"
-import dbConnect from "./db/dbConnect.js"
-import studentRoutes from "./routes/student.routes.js"
+import express from "express";
+import dotenv from "dotenv";
+import { PORT } from "./constants.js";
+import dbConnect from "./db/dbConnect.js";
+import studentRoutes from "./routes/student.routes.js";
 import cors from "cors";
+import authRoutes from "./routes/auth.routes.js";
 
-dotenv.config()
+dotenv.config();
 
-const app = express()
+const app = express();
 
 
-app.use(express.json())
+app.use(express.json());
 
-dbConnect()
+dbConnect();
 
 app.use(cors());
+
+app.use("/", authRoutes);
 app.use("/", studentRoutes);
 
 app.listen(PORT, () => {

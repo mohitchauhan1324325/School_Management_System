@@ -1,6 +1,6 @@
 export const getStudents = async () => {
     try {
-        const res = await fetch("http://localhost:5000/students");
+        const res = await fetch("http://localhost:5001/students");
 
         const data = await res.json();
         return data;
@@ -13,7 +13,7 @@ export const getStudents = async () => {
 export const addStudents = async (data) => {
     try {
 
-        const res = await fetch("http://localhost:5000/students", {
+        const res = await fetch("http://localhost:5001/students", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
