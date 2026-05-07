@@ -1,71 +1,21 @@
+import api from "../utils/api";
+
 export const getStudents = async () => {
-    try {
-        const res = await fetch("http://localhost:5001/api/students");
-
-        const data = await res.json();
-        return data;
-
-    } catch (error) {
-        throw error;
-    }
-}
+    const res = await api.get("/api/students");
+    return res.data;
+};
 
 export const addStudents = async (data) => {
-    try {
-
-        const res = await fetch("http://localhost:5001/api/students", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
-
-        const result = await res.json();
-        return result;
-
-    } catch (error) {
-        throw error;
-    }
-}
+    const res = await api.post("/api/students", data);
+    return res.data;
+};
 
 export const deleteStudents = async () => {
-  try {
-    const res = await fetch("http://localhost:5000/api/students", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      throw new Error(data.message || "Delete failed");
-    }
-
-    return data;
-
-  } catch (error) {
-    throw error;
-  }
+    const res = await api.delete("/api/students");
+    return res.data;
 };
 
 export const deleteStudentById = async (id) => {
-    try {
-        const res = await fetch(`http://localhost:5000/api/students/${id}`, {
-            method: "DELETE",
-        });
-
-        const data = await res.json();
-
-    if (!res.ok) {
-      throw new Error(data.message || "Delete failed");
-    }
-
-    return data;
-
-    } catch (error) {
-        throw error;
-    }
+    const res = await api.delete(`/api/students/${id}`);
+    return res.data;
 };

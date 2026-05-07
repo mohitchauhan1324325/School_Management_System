@@ -1,46 +1,23 @@
+import api from "../utils/api";
+
 export const register = async (data) => {
-    try {
 
-        const res = await fetch("http://localhost:5001/api/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
+    const res = await api.post("/api/register", data);
 
-        const result = await res.json();
-        return result;
-
-    } catch (error) {
-        throw error;
-        console.log(error);
-        
-    }
-}
+    return res.data;
+};
 
 export const loginUser = async (data) => {
-    try {
-        const res = await fetch("http://localhost:5001/api/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
 
-        const result = await res.json();
-        const token = result.data.token;
-        const user = result.data.result;
+    const res = await api.post("/api/login", data);
 
-        if (token && user) {
-            localStorage.setItem("token", token);
-            localStorage.setItem("user", JSON.stringify(user));
-        }
+    const token = res.data.token;
+    const user = res.data.user;
 
-        return result.data;
-
-    } catch (error) {
-        throw error;
+    if (token && user) {
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
     }
-}
+
+    return res.data;
+};
