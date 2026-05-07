@@ -1,6 +1,6 @@
 export const getStudents = async () => {
     try {
-        const res = await fetch("http://localhost:5001/students");
+        const res = await fetch("http://localhost:5001/api/students");
 
         const data = await res.json();
         return data;
@@ -13,7 +13,7 @@ export const getStudents = async () => {
 export const addStudents = async (data) => {
     try {
 
-        const res = await fetch("http://localhost:5001/students", {
+        const res = await fetch("http://localhost:5001/api/students", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -31,7 +31,7 @@ export const addStudents = async (data) => {
 
 export const deleteStudents = async () => {
   try {
-    const res = await fetch("http://localhost:5000/students", {
+    const res = await fetch("http://localhost:5000/api/students", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ export const deleteStudents = async () => {
 
 export const deleteStudentById = async (id) => {
     try {
-        const res = await fetch(`http://localhost:5000/students/${id}`, {
+        const res = await fetch(`http://localhost:5000/api/students/${id}`, {
             method: "DELETE",
         });
 

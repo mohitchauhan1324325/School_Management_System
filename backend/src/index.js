@@ -20,8 +20,8 @@ dbConnect();
 
 app.use(cors());
 
-app.use("/", authRoutes);
-app.use("/", studentRoutes);
+app.use("/api", authRoutes);
+app.use("/api", studentRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

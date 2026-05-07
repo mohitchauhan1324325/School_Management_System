@@ -1,6 +1,6 @@
 import React from 'react'
 
-const LoginForm = ({ handleChange, hanedleLogin }) => {
+const LoginForm = ({ handleChange, handleLogin }) => {
     return (
         <div className='flex justify-center items-center min-h-screen bg-gray-100'>
             <div className='bg-white p-6 rounded-xl shadow-md w-80'>
@@ -25,7 +25,7 @@ const LoginForm = ({ handleChange, hanedleLogin }) => {
 
                 <button
                     className="bg-blue-500 text-white w-full p-2 rounded"
-                    onClick={hanedleLogin}
+                    onClick={handleLogin}
                 >
                     Login
                 </button>

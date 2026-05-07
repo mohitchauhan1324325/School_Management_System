@@ -4,7 +4,7 @@ import protect from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/students", protect, addStudents);
+router.post("/students", addStudents);
 
 router.get("/students", getStudents);
 

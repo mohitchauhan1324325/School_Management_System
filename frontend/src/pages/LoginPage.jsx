@@ -3,6 +3,7 @@ import LoginForm from '../components/LoginForm'
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { loginUser } from '../api/authApi';
 
 const LoginPage = () => {
 
@@ -18,9 +19,9 @@ const LoginPage = () => {
     }
 
     const handleLogin = async () => {
-        try {
 
-            await LoginForm(form);
+        try {
+            await loginUser(form);
             toast.success("Login successfully");
             navigate("/");
 

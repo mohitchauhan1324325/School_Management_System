@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import AddStudents from './pages/AddStudents'
 import { ToastContainer } from 'react-toastify'
 import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<StudentsPage />} />
           <Route path="/addStudents" element={<AddStudents />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
         <ToastContainer
           position="top-right"
