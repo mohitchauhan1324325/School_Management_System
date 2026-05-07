@@ -30,7 +30,8 @@ export const loginUser = async (data) => {
         });
 
         const result = await res.json();
-        const { token, user } = result.data;
+        const token = result.data.token;
+        const user = result.data.result;
 
         if (token && user) {
             localStorage.setItem("token", token);
