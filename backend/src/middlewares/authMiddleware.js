@@ -16,6 +16,7 @@ const protect = (req, res, next) => {
         req.user = { id: decoded.id };
 
         next();
+        
     } catch (error) {
         console.log("JWT ERROR:", error.message);
         return res.status(401).json({ message: "Unauthorized" });
