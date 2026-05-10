@@ -3,11 +3,21 @@ import { useEffect, useState } from 'react';
 import { deleteStudentById, deleteStudents, getStudents } from '../api/studentApi';
 import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
+import { logout } from '../utils/auth';
+import { useParams } from 'react-router-dom';
 
 const StudentsPage = () => {
 
     const [students, setStudents] = useState([]);
     const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+    }
+
+    const handleDetails = (id) => {
+        navigate(`/students/${id}`);
+    }
 
     const fetchStudents = async () => {
         try {
@@ -47,6 +57,12 @@ const StudentsPage = () => {
         <div className="min-h-screen bg-gray-100 p-6">
 
             <div className="max-w-4xl mx-auto space-y-4">
+                 <button
+                className="bg-red-500 text-white p-2 rounded"
+                onClick={handleLogout}
+            >
+               logout
+            </button>
 
                 <h1 className="text-3xl font-bold text-center text-gray-700">
                     Students List
@@ -56,6 +72,7 @@ const StudentsPage = () => {
                     <div
                         key={student._id}
                         className="flex flex-col md:flex-row md:items-center justify-between bg-white p-4 rounded-xl shadow gap-4"
+                        onClick={() => handleDetails(student._id)}
                     >
                         <div className="space-y-1">
                             <h1 className="text-xl font-semibold text-gray-800">

@@ -5,6 +5,7 @@ import AddStudents from './pages/AddStudents'
 import { ToastContainer } from 'react-toastify'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import StudentDetails from './pages/StudentDetails'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
           <Route path="/addStudents" element={<AddStudents />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/Students/:id" element={<StudentDetails />} />
         </Routes>
         <ToastContainer
           position="top-right"
