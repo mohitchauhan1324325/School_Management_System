@@ -7,20 +7,38 @@ export const registerUser = async (req, res) => {
 
     try {
 
-        const { name, email, password, phone } = req.body;
+        const { name, email, password, phone, role } = req.body;
+        console.log(name);
 
-        const userExists = await User.findOne({ email });
+        if (
+            !name ||
+            !email ||
+            !password ||
+            !phone
+        ) {
+            return res.status(400).json({
+                message: "All fields required"
+            });
+        }
+        
+        const userExists = await User.findOne({ email }).lean();
+       
         if (userExists) {
             return res.status(400).json({ message: "User already exists" });
         }
+      
+        const allowedRoles = ["student", "teacher"];
 
+        const userRole = allowedRoles.includes(role) ? role : "student";
+       
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const user = await User.create({
             name,
             email,
             password: hashedPassword,
-            phone
+            phone,
+            role: userRole
         });
 
         res.status(201).json({
@@ -29,11 +47,14 @@ export const registerUser = async (req, res) => {
                 _id: user._id,
                 name: user.name,
                 email: user.email,
-                phone: user.phone
+                phone: user.phone,
+                role: user.role
             }
         });
 
     } catch (error) {
+        console.log(error);
+
         res.status(500).json({ message: error.message });
     }
 };
@@ -45,12 +66,12 @@ export const loginUser = async (req, res) => {
 
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({ message: "invalid password" });
+            return res.status(400).json({ message: "Invalid email or password" });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(404).json({ message: "invalid password" });
+            return res.status(401).json({ message: "Invalid email or password" });
         }
 
         const token = jwt.sign(

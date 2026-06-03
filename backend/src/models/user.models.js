@@ -10,7 +10,13 @@ const userSchema = new mongoose.Schema({
     },
 
     password: String,
-    phone: Number
+    phone: Number,
+
+    role: {
+        type: String,
+        enum: ["student", "teacher", "admin"],
+        default: "student"
+    }
 
 }, { timestamps: true });
 

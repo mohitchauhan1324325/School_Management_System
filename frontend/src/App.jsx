@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import StudentDetails from './pages/StudentDetails'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
 
@@ -14,10 +15,19 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<StudentsPage />} />
-          <Route path="/addStudents" element={<AddStudents />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/Students/:id" element={<StudentDetails />} />
+
+          <Route
+            path="/addStudents"
+            element={
+              <ProtectedRoute allowedRoles={["teacher"]}>
+                <AddStudents />
+              </ProtectedRoute>
+            }
+          />
+
         </Routes>
         <ToastContainer
           position="top-right"

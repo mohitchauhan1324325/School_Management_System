@@ -3,13 +3,14 @@ import { useEffect, useState } from 'react';
 import { deleteStudentById, deleteStudents, getStudents } from '../api/studentApi';
 import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
-import { logout } from '../utils/auth';
+import { getUserRole, logout } from '../utils/auth';
 import { useParams } from 'react-router-dom';
 
 const StudentsPage = () => {
 
     const [students, setStudents] = useState([]);
     const navigate = useNavigate();
+    const role = getUserRole();
 
     const handleLogout = () => {
         logout();
@@ -57,12 +58,12 @@ const StudentsPage = () => {
         <div className="min-h-screen bg-gray-100 p-6">
 
             <div className="max-w-4xl mx-auto space-y-4">
-                 <button
-                className="bg-red-500 text-white p-2 rounded"
-                onClick={handleLogout}
-            >
-               logout
-            </button>
+                <button
+                    className="bg-red-500 text-white p-2 rounded"
+                    onClick={handleLogout}
+                >
+                    logout
+                </button>
 
                 <h1 className="text-3xl font-bold text-center text-gray-700">
                     Students List
@@ -85,48 +86,58 @@ const StudentsPage = () => {
                             </h3>
                         </div>
 
-                        <button
-                            onClick={() => handleDeleteById(student._id)}
-                            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
-                        >
-                            Delete Student
-                        </button>
+                        {role === "teacher" && (
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleDeleteById(student._id);
+                                }
+                                }
+                                className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
+                            >
+                                Delete Student
+                            </button>)}
                     </div>
                 ))}
 
-                <div className="flex flex-col md:flex-row gap-4 mt-6">
+                {role === "teacher" && (
+                    <div className="flex flex-col md:flex-row gap-4 mt-6">
 
-                    <button
-                        onClick={() => handleDelete()}
-                        className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition"
-                    >
-                        Delete All Students
-                    </button>
+                        <button
+                            onClick={() => handleDelete()}
+                            className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition"
+                        >
+                            Delete All Students
+                        </button>
 
-                    <button
-                        onClick={() => navigate("/addStudents")}
-                        className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
-                    >
-                        Add Students
-                    </button>
+                        <button
+                            onClick={() => navigate("/addStudents")}
+                            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
+                        >
+                            Add Students
+                        </button>
 
-                </div>
+                    </div>
+                )}
 
             </div>
 
-            <button
-                className="bg-blue-500 text-white p-2 rounded"
-                onClick={() => navigate("/login")}
-            >
-                login
-            </button>
+            <div className='flex gap-4'>
+                <button
+                    className="bg-blue-500 text-white p-2 rounded"
+                    onClick={() => navigate("/login")}
+                >
+                    login
+                </button>
 
-            <button
-                className="bg-blue-500 text-white p-2 rounded"
-                onClick={() => navigate("/register")}
-            >
-                Register
-            </button>
+                <button
+                    className="bg-blue-500 text-white p-2 rounded"
+                    onClick={() => navigate("/register")}
+                >
+                    Register
+                </button>
+
+            </div>
         </div>
     )
 }

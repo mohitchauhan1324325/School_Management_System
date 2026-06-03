@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { addStudents } from '../api/studentApi';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const AddStudents = () => {
 
@@ -35,7 +36,7 @@ const AddStudents = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <form 
+            <form
                 onSubmit={handleSubmit}
                 className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md space-y-4"
             >
@@ -80,7 +81,7 @@ const AddStudents = () => {
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
 
-                <button 
+                <button
                     type="submit"
                     className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200"
                 >
