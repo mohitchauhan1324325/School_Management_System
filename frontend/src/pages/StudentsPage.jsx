@@ -10,7 +10,7 @@ const StudentsPage = () => {
 
     const [students, setStudents] = useState([]);
     const navigate = useNavigate();
-    const role = getUserRole();
+    const role = "teacher";
 
     const handleLogout = () => {
         logout();
@@ -47,7 +47,7 @@ const StudentsPage = () => {
     const handleDeleteById = async (id) => {
         try {
             await deleteStudentById(id);
-            setStudents(prev => prev.filter(room => room._id !== id));
+            setStudents(prev => prev.filter(student => student.id !== id));
             toast.success("Student delete successfully");
         } catch (error) {
             toast.error("Faild to delete");
@@ -71,18 +71,18 @@ const StudentsPage = () => {
 
                 {students?.map((student) => (
                     <div
-                        key={student._id}
+                        key={student.id}
                         className="flex flex-col md:flex-row md:items-center justify-between bg-white p-4 rounded-xl shadow gap-4"
-                        onClick={() => handleDetails(student._id)}
+                        onClick={() => handleDetails(student.id)}
                     >
                         <div className="space-y-1">
                             <h1 className="text-xl font-semibold text-gray-800">
                                 Name: {student.name}
                             </h1>
                             <h3 className="text-gray-600">Age: {student.age}</h3>
-                            <h3 className="text-gray-600">Class: {student.class}</h3>
+                            <h3 className="text-gray-600">Class: {student.class_name}</h3>
                             <h3 className="text-gray-600">
-                                School Name: {student.schoolName || "No School"}
+                                School Name: {student.school_name || "No School"}
                             </h3>
                         </div>
 
@@ -90,7 +90,7 @@ const StudentsPage = () => {
                             <button
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    handleDeleteById(student._id);
+                                    handleDeleteById(student.id);
                                 }
                                 }
                                 className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"

@@ -1,51 +1,101 @@
-import Student from "../models/student.models.js";
+import pool from "../config/db.js";
 
 export const addStudents = async (req, res) => {
     try {
-        const student = new Student(req.body);
-        const saveStudent = await student.save();
+        const { name, age, class_name, school_name } = req.body;
 
-        res.status(200).json(saveStudent);
+        const result = await pool.query(
+            `INSERT INTO student (name, age, class_name, school_name)
+       VALUES ($1, $2, $3, $4)
+       RETURNING *`,
+            [name, age, class_name, school_name]
+        );
+
+        res.status(200).json(result.rows[0]);
     } catch (error) {
+        console.log(error);
+
         res.status(500).json({ message: error.message });
     }
 };
 
 export const getStudents = async (req, res) => {
     try {
-        const students = await Student.find();
-        res.status(200).json(students);
+
+        const result = await pool.query(`
+    SELECT id, name, age, class_name, school_name
+    FROM student
+`);
+
+        res.status(200).json(result.rows);
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: error.message });
     }
 };
 
 export const getStudentById = async (req, res) => {
     try {
-        const id = req.params.id;
-        const student = await Student.findById(id);
-        res.status(200).json(student);
+        const { id } = req.params;
+
+        const result = await pool.query(`
+            SELECT id, name, age, class_name, school_name
+            FROM student
+            WHERE id = $1`,
+            [id]
+        );
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: "Student not found" });
+        }
+        res.status(200).json(result.rows[0]);
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: error.message });
     }
 };
 
 export const deleteStudentById = async (req, res) => {
     try {
-        const student = await Student.findByIdAndDelete(req.params.id);
-        res.json({ message: "Student deleted" });
+        const { id } = req.params;
+
+        const result = await pool.query(`
+            DELETE FROM student
+            WHERE id = $1
+            RETURNING *`,
+            [id]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({
+                message: "Student not found"
+            });
+        }
+
+        res.status(200).json({
+            message: "Student deleted successfully",
+            student: result.rows[0]
+        });
 
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: error.message });
     }
 };
 
 export const deleteStudents = async (req, res) => {
     try {
-        const students = await Student.deleteMany();
+        const result = await pool.query(`
+            DELETE FROM Student
+            RETURNING *
+            `);
 
-        res.json({ message: "All students are deleted successfully" });
+        res.status(200).json({
+            message: "All students deleted successfully",
+            deletedCount: result.rowCount
+        });
+
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: error.message });
     }
 };

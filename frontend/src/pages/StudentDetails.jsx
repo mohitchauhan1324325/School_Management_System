@@ -13,7 +13,6 @@ const StudentDetails = () => {
         const fetchStudents = async () => {
             try {
                 const res = await getStudentById(id);
-
                 setStudent(res);
 
             } catch (error) {
@@ -32,4 +31,4 @@ const StudentDetails = () => {
     )
 }
 
-export default StudentDetails
+export default StudentDetails;

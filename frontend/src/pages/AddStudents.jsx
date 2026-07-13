@@ -11,8 +11,8 @@ const AddStudents = () => {
     const [formData, setFormData] = useState({
         name: "",
         age: "",
-        class: "",
-        schoolName: ""
+        class_name: "",
+        school_name: ""
     });
 
     const handleChange = (e) => {
@@ -65,18 +65,18 @@ const AddStudents = () => {
 
                 <input
                     type="text"
-                    name='class'
+                    name='class_name'
                     placeholder='Enter Class'
-                    value={formData.class}
+                    value={formData.class_name}
                     onChange={handleChange}
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
 
                 <input
                     type="text"
-                    name="schoolName"
+                    name="school_name"
                     placeholder='Enter School name'
-                    value={formData.schoolName}
+                    value={formData.school_name}
                     onChange={handleChange}
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />

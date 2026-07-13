@@ -1,6 +1,6 @@
 import express from "express";
 import { addStudents, deleteStudentById, deleteStudents, getStudentById, getStudents } from "../controllers/student.controller.js";
-import protect from "../middlewares/authMiddleware.js";
+// import protect from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
@@ -10,8 +10,8 @@ router.get("/students", getStudents);
 
 router.get("/students/:id", getStudentById);
 
-router.delete("/students/:id", protect, deleteStudentById);
+router.delete("/students/:id", deleteStudentById);
 
-router.delete("/students", protect, deleteStudents);
+router.delete("/students", deleteStudents);
 
 export default router;
