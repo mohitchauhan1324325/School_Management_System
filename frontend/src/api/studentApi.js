@@ -24,3 +24,13 @@ export const deleteStudentById = async (id) => {
     const res = await api.delete(`/api/students/${id}`);
     return res.data;
 };
+
+export const updateStudents = async (data, id) => {
+    const res = await api.put(`/api/students/${id}`, data);
+    return res.data;
+};
+
+export const getAllClasses = async () => {
+    const res = await api.get(`/api/students/classes`);
+    return res.data;
+};

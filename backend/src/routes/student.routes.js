@@ -1,5 +1,5 @@
 import express from "express";
-import { addStudents, deleteStudentById, deleteStudents, getStudentById, getStudents } from "../controllers/student.controller.js";
+import { addStudents, deleteStudentById, deleteStudents, getAllClasses, getStudentById, getStudents, updateStudents } from "../controllers/student.controller.js";
 // import protect from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
@@ -13,5 +13,9 @@ router.get("/students/:id", getStudentById);
 router.delete("/students/:id", deleteStudentById);
 
 router.delete("/students", deleteStudents);
+
+router.put("/students/:id", updateStudents);
+
+router.get("/students/classe", getAllClasses);
 
 export default router;
