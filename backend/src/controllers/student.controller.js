@@ -134,13 +134,14 @@ export const updateStudents = async (req, res) => {
 export const getAllClasses = async (req, res) => {
     try {
         const result = await pool.query(`
-            SELECT class_name
+            SELECT DISTINCT class_name
             FROM student
+            ORDER BY class_name
             `);
-        res.status(200).json(result.rows[0]);
+        res.status(200).json(result.rows);
 
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: error.message });
     }
-}
+};

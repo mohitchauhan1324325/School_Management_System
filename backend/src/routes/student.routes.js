@@ -8,6 +8,8 @@ router.post("/students", addStudents);
 
 router.get("/students", getStudents);
 
+router.get("/students/classes", getAllClasses);
+
 router.get("/students/:id", getStudentById);
 
 router.delete("/students/:id", deleteStudentById);
@@ -16,6 +18,6 @@ router.delete("/students", deleteStudents);
 
 router.put("/students/:id", updateStudents);
 
-router.get("/students/classe", getAllClasses);
+
 
 export default router;
