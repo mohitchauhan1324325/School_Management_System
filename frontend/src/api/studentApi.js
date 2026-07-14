@@ -8,7 +8,7 @@ export const getStudents = async () => {
 export const getStudentById = async (id) => {
     const res = await api.get(`/api/students/${id}`)
     return  res.data;
-}
+};
 
 export const addStudents = async (data) => {
     const res = await api.post("/api/students", data);
