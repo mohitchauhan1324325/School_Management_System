@@ -8,6 +8,7 @@ import RegisterPage from './pages/RegisterPage'
 import StudentDetails from './pages/StudentDetails'
 import ProtectedRoute from './components/ProtectedRoute'
 import ClassesPage from './pages/ClassesPage'
+import ClassDetails from './pages/ClassDetails'
 
 function App() {
 
@@ -19,7 +20,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/Students/:id" element={<StudentDetails />} />
-          <Route path="/Students/classes" element={<ClassesPage />} />
+          <Route path="/classes" element={<ClassesPage />} />
+          <Route path="/classes/:className" element={<ClassDetails />} />
           <Route
             path="/addStudents"
             element={

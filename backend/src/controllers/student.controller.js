@@ -22,12 +22,26 @@ export const addStudents = async (req, res) => {
 export const getStudents = async (req, res) => {
     try {
 
-        const result = await pool.query(`
-    SELECT id, name, age, class_name, school_name
-    FROM student
-`);
+        const { class_name } = req.query;
+        let result;
+
+        if (class_name) {
+            result = await pool.query(`
+                SELECT *
+                FROM student
+                WHERE class_name = $1`,
+                [class_name]
+            );
+        }
+        else {
+            result = await pool.query(`
+                 SELECT id, name, age, class_name, school_name
+                FROM student
+             `);
+        }
 
         res.status(200).json(result.rows);
+
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: error.message });

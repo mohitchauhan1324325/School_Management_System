@@ -1,7 +1,11 @@
 import api from "../utils/api";
 
-export const getStudents = async () => {
-    const res = await api.get("/api/students");
+export const getStudents = async (className) => {
+    const res = await api.get("/api/students",{
+        params: {
+            class_name: className
+        }
+    });
     return res.data;
 };
 
